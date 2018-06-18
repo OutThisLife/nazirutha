@@ -8,7 +8,7 @@
     "build": "next build",
     "export": "next build && next export",
     "heroku-postbuild": "npm run export",
-    "start": "serve out/"
+    "start": "serve out/ -p $PORT"
   },
   "keywords": [],
   "author": "",
