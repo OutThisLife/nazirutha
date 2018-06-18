@@ -25,20 +25,22 @@ const Header = styled.header`
 export default () => (
   <Header>
     <h1>
-      <Link href="/">nazirutha.</Link>
+      <Link href="/">
+        <a>nazirutha.</a>
+      </Link>
     </h1>
 
     <nav>
-      <Link href="/">
-        <a>home</a>
-      </Link>
-
-      <Link href="/">
+      <Link href="/about">
         <a>about</a>
       </Link>
 
       <Link href="/">
         <a>contact</a>
+      </Link>
+
+      <Link href="/">
+        <a>donate</a>
       </Link>
     </nav>
   </Header>

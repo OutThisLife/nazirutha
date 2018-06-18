@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
     "export": "next build && next export",
     "heroku-postbuild": "npm run export",
@@ -15,7 +15,11 @@
   "license": "ISC",
   "dependencies": {
     "faker": "^4.1.0",
+    "gray-matter": "^4.0.1",
+    "isomorphic-fetch": "^2.2.1",
+    "marked": "^0.4.0",
     "next": "^6.0.3",
+    "path-match": "^1.2.4",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "recompose": "^0.27.1",

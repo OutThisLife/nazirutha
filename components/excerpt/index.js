@@ -3,7 +3,7 @@ import faker from 'faker'
 import Link from 'next/link'
 
 const Article = styled.article`
-  align-items: flex-start;
+  align-items: center;
 
   &:not(:only-child) {
     padding: 3vmax 0;
@@ -61,13 +61,19 @@ const Article = styled.article`
 export default ({ title, copy, img, ...props }) => (
   <Article {...props}>
     <hgroup>
-      <h2>{faker.lorem.sentence()}</h2>
+      <h2>
+        <Link href="/?slug=test-post" as="/test-post" prefetch>
+          <a>{faker.lorem.sentence()}</a>
+        </Link>
+      </h2>
     </hgroup>
 
     <figure>
-      <a>
-        <img src="//picsum.photos/500/300/?random" alt="" />
-      </a>
+      <Link href="/?slug=test-post" as="/test-post">
+        <a>
+          <img src="//picsum.photos/500/300/?random" alt="" />
+        </a>
+      </Link>
     </figure>
 
     <figcaption>
