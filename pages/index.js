@@ -7,10 +7,12 @@ import Main from '../components/main'
 import Post from '../components/post'
 import Footer from '../components/footer'
 
+const port = parseInt(process.env.PORT, 10) || 3000
+
 export default class Index extends PureComponent {
   static async getInitialProps({ query }) {
     if (!cache.get('posts')) {
-      const json = await (await fetch(`http://localhost:3000/api/posts`, { method: 'GET' })).json()
+      const json = await (await fetch(`http://localhost:${port}/api/posts`, { method: 'GET' })).json()
       cache.put('posts', JSON.stringify(json))
     }
 

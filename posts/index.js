@@ -28,5 +28,5 @@ module.exports = async () => {
     })
   )
 
-  return data
+  return Array.from(new Set(data))
 }
