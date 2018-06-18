@@ -1,0 +1,119 @@
+:root {
+  --color: 11,11,11;
+  --bg: 255,255,255;
+
+  --link: 0,0,0;
+  --link-hover: 255,0,71;
+
+  --lg: calc(36px + (64 - 36) * (100vw - 400px) / 1600);
+  --md: calc(26px + (33 - 26) * (100vw - 400px) / 1600);
+  --rg: calc(13px + (16 - 13) * (100vw - 400px) / 1600);
+  --sm: calc(10px + (12 - 10) * (100vw - 400px) / 1600);
+}
+
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-variant-ligatures: none;
+  -webkit-font-variant-ligatures: none;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+}
+
+body {
+  color: rgb(var(--color));
+  font-family: 돋움, dotum, Helvetica, sans-serif;
+  line-height: 1;
+  background: rgb(var(--bg));
+}
+
+#__next {
+  display: grid;
+  grid-template-columns: repeat(40, 1fr);
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+#__next > header,
+#__next > main,
+#__next > main > article,
+#__next > footer {
+  grid-column: 1 / -1;
+  display: inherit;
+  grid-template-columns: inherit;
+}
+
+#__next > header {
+  grid-column: 3 / -3;
+  grid-row: 1;
+  padding: 1.5vmax 0;
+}
+
+#__next > main {
+  grid-row: 2;
+}
+  #__next > main > article {
+    grid-column: 9 / -9;
+  }
+
+#__next > footer {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  padding: 1.5vmax 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+h1 {
+  font-size: var(--lg);
+}
+
+h2 {
+  font-size: var(--md);
+  line-height: 1.33;
+}
+  h2 a {
+    font-weight: inherit;
+    font-size: inherit;
+  }
+
+h3 {
+  font-size: var(--rg);
+}
+
+h5, h6, small {
+  font-size: var(--sm);
+}
+
+nav a, p {
+  font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+}
+
+a {
+  color: rgb(var(--link));
+  text-decoration-color: transparent;
+}
+  a:hover {
+    text-decoration-color: rgb(var(--link-hover));
+  }
+
+p {
+  font-size: var(--rg);
+  line-height: 1.75;
+}
+
+figure {
+  margin: 0;
+}
+
+img, object, embed, iframe, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
