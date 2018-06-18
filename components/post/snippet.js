@@ -1,9 +1,8 @@
 import styled from 'styled-components'
-import faker from 'faker'
 import Link from 'next/link'
 
 const Article = styled.article`
-  align-items: flex-start;
+  align-items: center;
 
   &:not(:only-child) {
     padding: 3vmax 0;
@@ -47,31 +46,29 @@ const Article = styled.article`
     @media (max-width: 767px) {
       grid-column: 1 / -1;
     }
-
-    p {
-      margin: 0;
-
-      + p {
-        margin-top: 1.7em;
-      }
-    }
   }
 `
 
-export default ({ title, copy, img, ...props }) => (
+export default ({ data: { title, slug, excerpt = '' }, ...props }) => (
   <Article {...props}>
     <hgroup>
-      <h2>{faker.lorem.sentence()}</h2>
+      <h2>
+        <Link href={`/?slug=${slug}`} as={`/${slug}`} prefetch>
+          <a>{title}</a>
+        </Link>
+      </h2>
     </hgroup>
 
     <figure>
-      <a>
-        <img src="//picsum.photos/500/300/?random" alt="" />
-      </a>
+      <Link href={`/?slug=${slug}`} as={`/${slug}`} prefetch>
+        <a>
+          <img src="//picsum.photos/500/300/?random" alt="" />
+        </a>
+      </Link>
     </figure>
 
     <figcaption>
-      <p>{faker.lorem.paragraphs(1)}</p>
+      <p>{excerpt}</p>
     </figcaption>
   </Article>
 )

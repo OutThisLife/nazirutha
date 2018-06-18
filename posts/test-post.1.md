@@ -1,6 +1,6 @@
 ---
-title: Hello
-slug: home
+title: one
+slug: three
 excerpt: in a world of lorem ipsum...
 ---
 

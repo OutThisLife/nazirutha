@@ -3,8 +3,6 @@ const { parse } = require('url')
 const next = require('next')
 const pathMatch = require('path-match')
 
-const repo = require('./repo')
-
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 
@@ -18,9 +16,7 @@ const handle = app.getRequestHandler()
     const { pathname, query } = parsedUrl
 
     if (pathname.includes('/api/')) {
-      const posts = await repo.fetch()
-
-      posts.then(f => console.log(f))
+      const posts = await require('./posts/index')()
 
       res.writeHead(200, { 'Content-Type': 'application/json' })
       return res.end(JSON.stringify(posts))

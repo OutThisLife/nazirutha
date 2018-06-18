@@ -1,25 +1,20 @@
 import { PureComponent, Fragment } from 'react'
-import dynamic from 'next/dynamic'
 import fetch from 'isomorphic-fetch'
-import matter from 'gray-matter'
-import marked from 'marked'
+import cache from 'memory-cache'
 
 import Header from '../components/header'
 import Main from '../components/main'
+import Post from '../components/post'
 import Footer from '../components/footer'
 
-const Excerpt = dynamic(import('../components/excerpt'))
-const Article = dynamic(import('../components/article'))
-
-let json
-
 export default class Index extends PureComponent {
-  static async getInitialProps({ req, query }) {
-    if (req) {
-      json = await (await fetch(`http://${req.headers.host}/api/posts`, { method: 'GET' })).json()
+  static async getInitialProps({ query }) {
+    if (!cache.get('posts')) {
+      const json = await (await fetch(`http://localhost:3000/api/posts`, { method: 'GET' })).json()
+      cache.put('posts', JSON.stringify(json))
     }
 
-    return { query, posts: json.data || [] }
+    return { query, posts: JSON.parse(cache.get('posts')) }
   }
 
   render() {
@@ -31,10 +26,12 @@ export default class Index extends PureComponent {
 
         {'slug' in query ? (
           <Main>
-            <Article {...this.props} />
+            <Post {...posts.find(({ data }) => query.slug === data.slug)} />
           </Main>
         ) : (
-          <Main>{posts.map(p => <Excerpt key={Math.random()} {...p} />)}</Main>
+          <Main style={{ gridAutoRows: 'max-content' }}>
+            {posts.map(post => <Post.Snippet key={post.data.slug} {...post} />)}
+          </Main>
         )}
 
         <Footer />

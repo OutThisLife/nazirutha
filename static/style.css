@@ -9,6 +9,9 @@
   --md: calc(26px + (33 - 26) * (100vw - 400px) / 1600);
   --rg: calc(13px + (16 - 13) * (100vw - 400px) / 1600);
   --sm: calc(10px + (12 - 10) * (100vw - 400px) / 1600);
+
+  --font-headings: 돋움, dotum, Helvetica, sans-serif;
+  --font-body: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
 }
 
 html {
@@ -25,7 +28,7 @@ html {
 
 body {
   color: rgb(var(--color));
-  font-family: 돋움, dotum, Helvetica, sans-serif;
+  font-family: var(--font-body);
   line-height: 1;
   background: rgb(var(--bg));
 }
@@ -67,6 +70,7 @@ body {
 
 h1,h2,h3,h4,h5,h6 {
   font-weight: 600;
+  font-family: var(--font-headings);
   letter-spacing: 0.03em;
 }
 
@@ -91,10 +95,6 @@ h5, h6, small {
   font-size: var(--sm);
 }
 
-nav a, p {
-  font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
-}
-
 a {
   color: rgb(var(--link));
   text-decoration-color: transparent;
@@ -111,7 +111,11 @@ a {
 p {
   font-size: var(--rg);
   line-height: 1.75;
+  margin: 0;
 }
+  p + p {
+    margin-top: 1.7em;
+  }
 
 figure {
   margin: 0;

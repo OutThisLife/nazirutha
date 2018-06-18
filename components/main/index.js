@@ -4,4 +4,4 @@ const Main = styled.main`
   align-items: center;
 `
 
-export default ({ children }) => <Main>{children}</Main>
+export default ({ children, ...props }) => <Main {...props}>{children}</Main>
