@@ -10,7 +10,9 @@ export default () => (
   <Fragment>
     <Header />
 
-    <Main>{[...Array(20).keys()].map(i => <Article key={i} />)}</Main>
+    <Main>
+      <Article full />
+    </Main>
 
     <Footer />
   </Fragment>

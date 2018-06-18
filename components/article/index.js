@@ -1,10 +1,17 @@
+import { Fragment } from 'react'
 import styled from 'styled-components'
 import faker from 'faker'
+import Link from 'next/link'
 
-const Article = styled.article`
-  align-items: center;
-  padding: 3vmax 0;
-  border-bottom: 1px solid rgba(var(--color), 0.02);
+const Article = styled.article.attrs({
+  style: ({ full = false }) => ({
+    alignItems: full ? 'flex-start' : 'center'
+  })
+})`
+  &:not(:only-child) {
+    padding: 3vmax 0;
+    border-bottom: 1px solid rgba(var(--color), 0.02);
+  }
 
   hgroup {
     grid-column: 1 / -1;
@@ -46,26 +53,46 @@ const Article = styled.article`
 
     p {
       margin: 0;
+
+      + p {
+        margin-top: 1.7em;
+      }
     }
   }
 `
 
-export default ({ children, ...props }) => (
-  <Article {...props}>
+export default ({ children, full = false, ...props }) => (
+  <Article full={full} {...props}>
     <hgroup>
       <h2>
-        <a href="javascript:;">{faker.lorem.sentence()}</a>
+        {full ? (
+          faker.lorem.sentence()
+        ) : (
+          <Link href="/single">
+            <a>{faker.lorem.sentence()}</a>
+          </Link>
+        )}
       </h2>
     </hgroup>
 
     <figure>
-      <a href="javascript:">
-        <img src="//picsum.photos/500/300/?random" alt="" />
-      </a>
+      <Link href="/single">
+        <a>
+          <img src="//picsum.photos/500/300/?random" alt="" />
+        </a>
+      </Link>
     </figure>
 
     <figcaption>
-      <p>{faker.lorem.paragraphs(1)}</p>
+      {full ? (
+        <Fragment>
+          <p>{faker.lorem.paragraphs(1)}</p>
+          <p>{faker.lorem.paragraphs(1)}</p>
+          <p>{faker.lorem.paragraphs(1)}</p>
+        </Fragment>
+      ) : (
+        <p>{faker.lorem.paragraphs(1)}</p>
+      )}
     </figcaption>
   </Article>
 )

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styled from 'styled-components'
 
 const Header = styled.header`
@@ -23,12 +24,22 @@ const Header = styled.header`
 
 export default () => (
   <Header>
-    <h1>nazirutha.</h1>
+    <h1>
+      <Link href="/">nazirutha.</Link>
+    </h1>
 
     <nav>
-      <a href="/">home</a>
-      <a href="/">about</a>
-      <a href="/">contact</a>
+      <Link href="/">
+        <a>home</a>
+      </Link>
+
+      <Link href="/">
+        <a>about</a>
+      </Link>
+
+      <Link href="/">
+        <a>contact</a>
+      </Link>
     </nav>
   </Header>
 )
