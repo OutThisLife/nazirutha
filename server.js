@@ -14,17 +14,15 @@ const handle = app.getRequestHandler()
   createServer(async (req, res) => {
     const parsedUrl = parse(req.url, true)
     const { pathname, query } = parsedUrl
+    const params = pathMatch()('/:slug')(pathname)
 
     if (pathname.includes('/api/')) {
       const posts = await require('./posts/index')()
 
       res.writeHead(200, { 'Content-Type': 'application/json' })
+
       return res.end(JSON.stringify(posts))
-    }
-
-    const params = pathMatch()('/:slug')(pathname)
-
-    if (params) {
+    } else if (params && !['about', 'contact'].includes(params.slug) && !/\./.test(params.slug)) {
       return app.render(req, res, '/', Object.assign(params, query))
     }
 

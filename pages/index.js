@@ -1,43 +1,33 @@
-import { PureComponent, Fragment } from 'react'
+import { compose, setStatic, pure } from 'recompose'
 import fetch from 'isomorphic-fetch'
 import cache from 'memory-cache'
 
-import Header from '../components/header'
-import Main from '../components/main'
-import Post from '../components/post'
-import Footer from '../components/footer'
+import withLayout from './_layout'
 
+import Post from '../components/post'
+
+const isDev = process.env.NODE_ENV !== 'production'
 const port = parseInt(process.env.PORT, 10) || 3000
 
-export default class Index extends PureComponent {
-  static async getInitialProps({ query }) {
+export default compose(
+  setStatic('getInitialProps', async ({ query }) => {
+    if (isDev) {
+      cache.clear()
+    }
+
     if (!cache.get('posts')) {
       const json = await (await fetch(`http://localhost:${port}/api/posts`, { method: 'GET' })).json()
       cache.put('posts', JSON.stringify(json))
     }
 
-    return { query, posts: JSON.parse(cache.get('posts')) }
-  }
+    const posts = JSON.parse(cache.get('posts'))
+    const single = 'slug' in query && posts.find(({ data }) => query.slug === data.slug)
 
-  render() {
-    const { query, posts = [] } = this.props
-
-    return (
-      <Fragment>
-        <Header />
-
-        {'slug' in query ? (
-          <Main>
-            <Post {...posts.find(({ data }) => query.slug === data.slug)} />
-          </Main>
-        ) : (
-          <Main style={{ gridAutoRows: 'max-content' }}>
-            {posts.map(post => <Post.Snippet key={post.data.slug} {...post} />)}
-          </Main>
-        )}
-
-        <Footer />
-      </Fragment>
-    )
-  }
-}
+    return { query, single, posts }
+  }),
+  withLayout,
+  pure
+)(
+  ({ single = {}, posts = [] }) =>
+    single ? <Post {...single} /> : <>{posts.map(post => <Post.Snippet key={post.data.slug} {...post} />)}</>
+)

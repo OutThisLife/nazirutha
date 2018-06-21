@@ -1,36 +1,48 @@
+@import url(//cdn.jsdelivr.net/font-kopub/latest/kopubdotum.css);
+
 :root {
   --color: 11,11,11;
   --bg: 255,255,255;
 
   --link: 0,0,0;
   --link-hover: 255,0,71;
+  --border: 240,240,244;
 
-  --lg: calc(36px + (64 - 36) * (100vw - 400px) / 1600);
+  --lg: calc(36px + (55 - 36) * (100vw - 400px) / 1600);
   --md: calc(26px + (33 - 26) * (100vw - 400px) / 1600);
   --rg: calc(13px + (16 - 13) * (100vw - 400px) / 1600);
   --sm: calc(10px + (12 - 10) * (100vw - 400px) / 1600);
 
-  --font-headings: 돋움, dotum, Helvetica, sans-serif;
-  --font-body: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+  --font-headings: 'KoPub Batang', 'KoPub Dotum', monospace;
+  --font-body: 'KoPub Batang', 'KoPub Dotum', monospace;
+  /* --font-body: Roboto,RobotoDraft,Helvetica,Arial,sans-serif; */
+
+  --inner-col: 9;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --inner-col: 4;
+  }
 }
 
 html {
-  font-size: 100%;
-  -webkit-text-size-adjust: 100%;
-  font-variant-ligatures: none;
-  -webkit-font-variant-ligatures: none;
-  text-rendering: optimizeLegibility;
-  -moz-osx-font-smoothing: grayscale;
-  font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
-  text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+  -moz-osx-font-smoothing: grayscale;
+  text-shadow: #fff 0px 1px 1px;
 }
 
 body {
   color: rgb(var(--color));
   font-family: var(--font-body);
   line-height: 1;
+  letter-spacing: 0.07em;
   background: rgb(var(--bg));
+}
+
+::selection {
+  color: #fff;
+  background: #ff0047;
 }
 
 #__next {
@@ -42,7 +54,6 @@ body {
 
 #__next > header,
 #__next > main,
-#__next > main > article,
 #__next > footer {
   grid-column: 1 / -1;
   display: inherit;
@@ -50,22 +61,16 @@ body {
 }
 
 #__next > header {
-  grid-column: 3 / -3;
   grid-row: 1;
-  padding: 1.5vmax 0 0;
 }
 
 #__next > main {
   grid-row: 2;
+  grid-auto-rows: max-content;
 }
-  #__next > main > article {
-    grid-column: 9 / -9;
-  }
 
 #__next > footer {
-  grid-column: 1 / -1;
   grid-row: 3;
-  padding: 1.5vmax 0;
 }
 
 h1,h2,h3,h4,h5,h6 {
