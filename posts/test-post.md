@@ -1,7 +1,0 @@
----
-title: Hello
-slug: home
-excerpt: in a world of lorem ipsum...
----
-
-copy here and here and there.
